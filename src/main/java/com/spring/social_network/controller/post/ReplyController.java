@@ -34,8 +34,8 @@ public class ReplyController {
     @GetMapping("/comments/{commentId}/replies")
     public ResponseEntity<ApiResponse<Page<ReplyResponse>>> getReplies(
             @PathVariable(name = "commentId") String commentId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size) {
 
         Page<ReplyResponse> replies = replyService.getRepliesByCommentId(commentId, page, size);
 

@@ -34,8 +34,8 @@ public class CommentController {
     @GetMapping("/posts/{postId}/comments")
     public ResponseEntity<ApiResponse<Page<CommentResponse>>> getComments(
             @PathVariable(name = "postId") String postId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
 
         Page<CommentResponse> comments = commentService.getCommentsByPostId(postId, page, size);
 

@@ -95,8 +95,8 @@ public class UserController {
     @GetMapping
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Page<UserResponseDto>>> getAllUsers(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size,
             HttpServletRequest request) {
         Page<UserResponseDto> users = userService.getAllUsers(page, size);
         return ResponseEntity.ok(ApiResponse.success(users, "Lấy danh sách người dùng thành công", request));
@@ -116,7 +116,7 @@ public class UserController {
     @PostMapping("/profile-picture")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<UserResponseDto>> uploadProfilePicture(
-            @RequestParam("file") MultipartFile file,
+            @RequestParam(name = "file") MultipartFile file,
             HttpServletRequest request) {
         UserResponseDto updatedUser = userService.uploadProfilePicture(file);
         return ResponseEntity.ok(ApiResponse.success(updatedUser, "Upload ảnh đại diện thành công", request));

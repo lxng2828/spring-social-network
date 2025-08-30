@@ -28,10 +28,10 @@ public class PostController {
 
         @PostMapping
         public ResponseEntity<ApiResponse<PostResponse>> createPost(
-                        @RequestParam("content") String content,
-                        @RequestParam(value = "files", required = false) List<MultipartFile> files,
-                        @RequestParam(value = "privacy", required = false) String privacy,
-                        @RequestParam(value = "hashtags", required = false) String hashtags) {
+                        @RequestParam(name = "content") String content,
+                        @RequestParam(name = "files", required = false) List<MultipartFile> files,
+                        @RequestParam(name = "privacy", required = false) String privacy,
+                        @RequestParam(name = "hashtags", required = false) String hashtags) {
 
                 List<String> parsedHashtags = new ArrayList<>();
                 if (hashtags != null && !hashtags.trim().isEmpty()) {
@@ -64,10 +64,10 @@ public class PostController {
         @PatchMapping("/{id}")
         public ResponseEntity<ApiResponse<PostResponse>> updatePost(
                         @PathVariable(name = "id") String id,
-                        @RequestParam(value = "content", required = false) String content,
-                        @RequestParam(value = "files", required = false) List<MultipartFile> files,
-                        @RequestParam(value = "privacy", required = false) String privacy,
-                        @RequestParam(value = "hashtags", required = false) String hashtags) {
+                        @RequestParam(name = "content", required = false) String content,
+                        @RequestParam(name = "files", required = false) List<MultipartFile> files,
+                        @RequestParam(name = "privacy", required = false) String privacy,
+                        @RequestParam(name = "hashtags", required = false) String hashtags) {
 
                 List<String> parsedHashtags = new ArrayList<>();
                 if (hashtags != null && !hashtags.trim().isEmpty()) {
@@ -107,8 +107,8 @@ public class PostController {
 
         @GetMapping("/feed")
         public ResponseEntity<ApiResponse<PostFeedResponse>> getFeed(
-                        @RequestParam(defaultValue = "1") int page,
-                        @RequestParam(defaultValue = "20") int limit) {
+                        @RequestParam(name = "page", defaultValue = "1") int page,
+                        @RequestParam(name = "limit", defaultValue = "20") int limit) {
                 PostFeedResponse feed = postService.getFeed(page, limit);
                 return ResponseEntity.ok(ApiResponse.<PostFeedResponse>builder()
                                 .success(true)
@@ -130,8 +130,8 @@ public class PostController {
         @GetMapping("/users/{userId}/posts")
         public ResponseEntity<ApiResponse<PostFeedResponse>> getUserPosts(
                         @PathVariable(name = "userId") String userId,
-                        @RequestParam(defaultValue = "1") int page,
-                        @RequestParam(defaultValue = "20") int limit) {
+                        @RequestParam(name = "page", defaultValue = "1") int page,
+                        @RequestParam(name = "limit", defaultValue = "20") int limit) {
                 PostFeedResponse posts = postService.getUserPosts(userId, page, limit);
                 return ResponseEntity.ok(ApiResponse.<PostFeedResponse>builder()
                                 .success(true)
