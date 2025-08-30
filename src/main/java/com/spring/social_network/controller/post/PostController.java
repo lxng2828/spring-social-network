@@ -63,7 +63,7 @@ public class PostController {
 
         @PatchMapping("/{id}")
         public ResponseEntity<ApiResponse<PostResponse>> updatePost(
-                        @PathVariable String id,
+                        @PathVariable(name = "id") String id,
                         @RequestParam(value = "content", required = false) String content,
                         @RequestParam(value = "files", required = false) List<MultipartFile> files,
                         @RequestParam(value = "privacy", required = false) String privacy,
@@ -97,7 +97,7 @@ public class PostController {
         }
 
         @DeleteMapping("/{id}")
-        public ResponseEntity<ApiResponse<Void>> deletePost(@PathVariable String id) {
+        public ResponseEntity<ApiResponse<Void>> deletePost(@PathVariable(name = "id") String id) {
                 postService.deletePost(id);
                 return ResponseEntity.ok(ApiResponse.<Void>builder()
                                 .success(true)
@@ -118,7 +118,7 @@ public class PostController {
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<ApiResponse<PostResponse>> getPostById(@PathVariable String id) {
+        public ResponseEntity<ApiResponse<PostResponse>> getPostById(@PathVariable(name = "id") String id) {
                 PostResponse post = postService.getPostById(id);
                 return ResponseEntity.ok(ApiResponse.<PostResponse>builder()
                                 .success(true)
@@ -129,7 +129,7 @@ public class PostController {
 
         @GetMapping("/users/{userId}/posts")
         public ResponseEntity<ApiResponse<PostFeedResponse>> getUserPosts(
-                        @PathVariable String userId,
+                        @PathVariable(name = "userId") String userId,
                         @RequestParam(defaultValue = "1") int page,
                         @RequestParam(defaultValue = "20") int limit) {
                 PostFeedResponse posts = postService.getUserPosts(userId, page, limit);

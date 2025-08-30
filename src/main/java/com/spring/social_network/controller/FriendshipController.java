@@ -107,7 +107,7 @@ public class FriendshipController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<String>> cancelFriendRequest(
-            @PathVariable String id,
+            @PathVariable(name = "id") String id,
             HttpServletRequest httpRequest) {
         friendshipService.cancelFriendRequest(id);
         return ResponseEntity.ok(ApiResponse.success("Hủy lời mời kết bạn thành công", httpRequest));
@@ -122,7 +122,7 @@ public class FriendshipController {
      */
     @PatchMapping("/{id}/accept")
     public ResponseEntity<ApiResponse<String>> acceptFriendRequest(
-            @PathVariable String id,
+            @PathVariable(name = "id") String id,
             HttpServletRequest httpRequest) {
         friendshipService.acceptFriendRequest(id);
         return ResponseEntity.ok(ApiResponse.success("Chấp nhận lời mời kết bạn thành công", httpRequest));
@@ -137,7 +137,7 @@ public class FriendshipController {
      */
     @PatchMapping("/{id}/decline")
     public ResponseEntity<ApiResponse<String>> declineFriendRequest(
-            @PathVariable String id,
+            @PathVariable(name = "id") String id,
             HttpServletRequest httpRequest) {
         friendshipService.declineFriendRequest(id);
         return ResponseEntity.ok(ApiResponse.success("Từ chối lời mời kết bạn thành công", httpRequest));
@@ -170,7 +170,7 @@ public class FriendshipController {
      */
     @DeleteMapping("/{id}/remove")
     public ResponseEntity<ApiResponse<String>> removeFriend(
-            @PathVariable String id,
+            @PathVariable(name = "id") String id,
             HttpServletRequest httpRequest) {
         friendshipService.removeFriend(id);
         return ResponseEntity.ok(ApiResponse.success("Hủy kết bạn thành công", httpRequest));

@@ -191,7 +191,7 @@ public class UserController {
     @GetMapping("/{userId}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<UserResponseDto>> getUserById(
-            @PathVariable String userId,
+            @PathVariable(name = "userId") String userId,
             HttpServletRequest request) {
         UserResponseDto user = userService.getUserById(userId);
         return ResponseEntity.ok(ApiResponse.success(user, "Lấy thông tin người dùng thành công", request));
